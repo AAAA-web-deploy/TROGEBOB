@@ -203,12 +203,18 @@ export function TrogebobSite() {
               <div className="top-stamp">
                 A VERY UNOFFICIAL MEME EXPERIMENT <span>↗</span>
               </div>
-              <p className="eyebrow">VITALIK + ANATOLY + RAJ PRESENT… NOTHING OFFICIAL</p>
-              <h1 id="heroTitle">
+              <h1 id="heroTitle" className="token-name">
+                VITALIK<span>+</span>
+                <br />
+                ANATOLY<span>+</span>
+                <br />
+                RAJ
+              </h1>
+              <p className="hero-kicker">
                 WHO&apos;S
                 <br />
                 IN THIS <em>HEAD?</em>
-              </h1>
+              </p>
               <p className="hero-question">
                 Three faces. <mark>One mind—or Three?!</mark>
               </p>
