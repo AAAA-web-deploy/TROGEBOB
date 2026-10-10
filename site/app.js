@@ -87,8 +87,9 @@ function setupNavigation(){
 function isValidAddress(addr){return /^0x[a-f\d]{40}$/i.test(addr||'');}
 function isValidURL(url){try{const u=new URL(url);return u.protocol==='https:'&&u.hostname.length>3;}catch{return false;}}
 function setupTrading(){
- const cfg=window.TROGEBOB_CONFIG||{};const ready=isValidAddress(cfg.ethereumContract)&&isValidURL(cfg.officialBuyUrl);
- if(ready){$('#contractDisplay').textContent=cfg.ethereumContract;$('#launchStatus').textContent='Confirm the contract matches the verified official listing before trading.';$('#copyContract').disabled=false;$('#copyContract').onclick=()=>navigator.clipboard.writeText(cfg.ethereumContract).then(()=>{const b=$('#copyContract');b.textContent='COPIED ✓';setTimeout(()=>b.textContent='COPY ADDRESS',1300);});}
+ const cfg=window.TROGEBOB_CONFIG||{};const address=isValidAddress(cfg.ethereumContract)?cfg.ethereumContract:'';const ready=Boolean(address)&&isValidURL(cfg.officialBuyUrl);
+ if(address){$('#contractDisplay').textContent=address;$('#copyContract').disabled=false;$('#copyContract').onclick=()=>navigator.clipboard.writeText(address).then(()=>{const b=$('#copyContract');b.textContent='COPIED ✓';setTimeout(()=>b.textContent='COPY ADDRESS',1300);});}
+ if(ready){$('#launchStatus').textContent='Confirm the contract matches the verified official listing before trading.';}
  $$('.trading-link').forEach(a=>{
   if(ready){a.href=cfg.officialBuyUrl;a.target='_blank';a.rel='noopener noreferrer';a.removeAttribute('aria-disabled');}
   else{a.setAttribute('aria-disabled','true');a.addEventListener('click',e=>{e.preventDefault();$('#info').scrollIntoView({behavior:'smooth'});});}

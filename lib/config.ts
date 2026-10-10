@@ -3,7 +3,7 @@
 export const TROGEBOB_CONFIG = {
   tokenName: "Vitalik+Anatoly+Raj",
   ticker: "TROGEBOB",
-  ethereumContract: "",
+  ethereumContract: "0xd01b72d837ba233235e137c9f3d67181c19fe664",
   officialBuyUrl: "",
   xUrl: "https://x.com/trogebob",
   telegramUrl: "https://t.me/trogebob",

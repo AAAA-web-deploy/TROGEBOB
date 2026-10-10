@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { isTradeReady, isValidURL, TROGEBOB_CONFIG } from "@/lib/config";
+import { isTradeReady, isValidAddress, isValidURL, TROGEBOB_CONFIG } from "@/lib/config";
 import {
   CHAPTERS,
   FOUNDERS,
@@ -110,6 +110,7 @@ export function TrogebobSite() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const result = useMemo(() => resolveResult(selection), [selection]);
   const ready = isTradeReady();
+  const publishedAddress = isValidAddress(TROGEBOB_CONFIG.ethereumContract) ? TROGEBOB_CONFIG.ethereumContract : "";
 
   useEffect(() => {
     const view = viewportRef.current;
@@ -197,7 +198,7 @@ export function TrogebobSite() {
   }
 
   async function writeContract() {
-    const text = ready && TROGEBOB_CONFIG.ethereumContract ? TROGEBOB_CONFIG.ethereumContract : "NOT PUBLISHED";
+    const text = publishedAddress || "NOT PUBLISHED";
     try {
       await Promise.race([
         navigator.clipboard.writeText(text),
@@ -584,7 +585,7 @@ export function TrogebobSite() {
               <p>
                 <strong>ETHEREUM TOKEN ADDRESS:</strong>
               </p>
-              <code id="contractDisplay">{ready ? TROGEBOB_CONFIG.ethereumContract : "NOT PUBLISHED"}</code>
+              <code id="contractDisplay">{publishedAddress || "NOT PUBLISHED"}</code>
               <button id="copyContract" type="button" onClick={copyContract}>
                 {copyLabel}
               </button>
