@@ -152,7 +152,7 @@ export function TrogebobSite() {
       </a>
       <header className="masthead" id="top">
         <a className="wordmark" href="#top" aria-label="Trogebob home">
-          <img className="wordmark-face" src="/assets/brand/wordmark-logo.png" alt="" width={36} height={36} />
+          <img className="wordmark-face" src="/assets/brand/logo.jpg" alt="" width={52} height={52} />
           <span>
             troge<span className="wordmark-end">bob!</span>
           </span>
@@ -504,7 +504,7 @@ export function TrogebobSite() {
             </div>
           </div>
           <div className="exit-right">
-            <img loading="lazy" src="/assets/brand/trogebob-round.webp" alt="Trogebob circular meme token mascot" width={700} height={700} />
+            <img loading="lazy" src="/assets/brand/logo.jpg" alt="Trogebob circular meme token mascot" width={700} height={700} />
             <p>
               THE FACE HAS SPOKEN.
               <br />

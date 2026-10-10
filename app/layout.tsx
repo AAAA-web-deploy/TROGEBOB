@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://trogebob.world"),
   title: "Trogebob — Vitalik+Anatoly+Raj",
   description: "Trogebob: Vitalik + Anatoly + Raj. Three faces. One mind—or Three?! Make a face, meet the meme, watch the fusion accident.",
-  icons: { icon: "/assets/brand/trogebob-round.webp" },
+  icons: { icon: "/assets/brand/logo.jpg" },
   openGraph: {
     title: "Vitalik+Anatoly+Raj | $TROGEBOB",
     description: "Three faces. One mind—or Three?! The completely unofficial Trogebob fusion lab.",
-    images: ["/assets/brand/trogebob-round.webp"],
+    images: ["/assets/brand/logo.jpg"],
   },
 };
 
