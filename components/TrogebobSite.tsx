@@ -584,6 +584,7 @@ export function TrogebobSite() {
         <p>
           © 2026 Trogebob fan parody. Not affiliated with or endorsed by Vitalik Buterin, Anatoly Yakovenko, Raj Gokal, Netflix, SpongeBob&apos;s rights holders, or the creators of the underlying memes. No investment returns are implied.
         </p>
+        <SocialMarks />
         <a href="#top" onClick={goToTop}>
           BACK TO TOP ↑
         </a>
