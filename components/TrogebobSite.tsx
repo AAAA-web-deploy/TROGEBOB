@@ -103,6 +103,7 @@ export function TrogebobSite() {
   const [selection, setSelection] = useState<Selection>(INITIAL);
   const [shareLabel, setShareLabel] = useState("↗ SHARE");
   const [copyLabel, setCopyLabel] = useState("COPY ADDRESS");
+  const [caLabel, setCaLabel] = useState("COPY CA");
   const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
   const railRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -195,10 +196,14 @@ export function TrogebobSite() {
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   }
 
-  async function copyContract() {
+  async function writeContract() {
     const text = ready && TROGEBOB_CONFIG.ethereumContract ? TROGEBOB_CONFIG.ethereumContract : "NOT PUBLISHED";
     try {
-      await navigator.clipboard.writeText(text);
+      await Promise.race([
+        navigator.clipboard.writeText(text),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("clipboard-timeout")), 800)),
+      ]);
+      return;
     } catch {
       const area = document.createElement("textarea");
       area.value = text;
@@ -210,8 +215,18 @@ export function TrogebobSite() {
       document.execCommand("copy");
       area.remove();
     }
+  }
+
+  async function copyContract() {
+    await writeContract();
     setCopyLabel("COPIED ✓");
     setTimeout(() => setCopyLabel("COPY ADDRESS"), 1300);
+  }
+
+  async function copyCa() {
+    await writeContract();
+    setCaLabel("COPIED ✓");
+    setTimeout(() => setCaLabel("COPY CA"), 1300);
   }
 
   return (
@@ -233,6 +248,9 @@ export function TrogebobSite() {
           <a href="#info">ABOUT</a>
         </nav>
         <SocialMarks />
+        <button className="nav-ca" type="button" onClick={copyCa}>
+          {caLabel}
+        </button>
         <TradeLink className="nav-buy trading-link">
           <span>GET $TROGEBOB ↗</span>
         </TradeLink>
@@ -262,6 +280,9 @@ export function TrogebobSite() {
           ABOUT / TOKEN
         </a>
         <SocialMarks />
+        <button className="nav-ca" type="button" onClick={copyCa}>
+          {caLabel}
+        </button>
       </nav>
 
       <main>
