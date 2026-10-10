@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { isTradeReady, TROGEBOB_CONFIG } from "@/lib/config";
+import { isTradeReady, isValidURL, TROGEBOB_CONFIG } from "@/lib/config";
 import {
   CHAPTERS,
   FOUNDERS,
@@ -22,6 +22,56 @@ const INITIAL: Selection = { v: "happy", a: "happy", r: "happy" };
 
 function scrollBehavior(): ScrollBehavior {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+}
+
+function TelegramMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+      />
+    </svg>
+  );
+}
+
+function XMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+      />
+    </svg>
+  );
+}
+
+function SocialMark({ label, href, children }: { label: string; href: string; children: React.ReactNode }) {
+  if (isValidURL(href)) {
+    return (
+      <a className="mark-button" href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <a className="mark-button" href="#top" aria-label={label} aria-disabled="true" onClick={(event) => event.preventDefault()}>
+      {children}
+    </a>
+  );
+}
+
+function SocialMarks() {
+  return (
+    <div className="head-social">
+      <SocialMark label="Telegram" href={TROGEBOB_CONFIG.telegramUrl}>
+        <TelegramMark />
+      </SocialMark>
+      <SocialMark label="X" href={TROGEBOB_CONFIG.xUrl}>
+        <XMark />
+      </SocialMark>
+    </div>
+  );
 }
 
 function TradeLink({ className, children }: { className: string; children: React.ReactNode }) {
@@ -169,6 +219,7 @@ export function TrogebobSite() {
           <a href="#wall">MEME WALL</a>
           <a href="#info">ABOUT</a>
         </nav>
+        <SocialMarks />
         <TradeLink className="nav-buy trading-link">
           <span>GET $TROGEBOB ↗</span>
         </TradeLink>
@@ -197,6 +248,7 @@ export function TrogebobSite() {
         <a href="#info" onClick={closeMenu}>
           ABOUT / TOKEN
         </a>
+        <SocialMarks />
       </nav>
 
       <main>
