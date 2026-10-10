@@ -554,11 +554,7 @@ export function TrogebobSite() {
               <button id="copyContract" type="button" disabled={!ready} onClick={copyContract}>
                 {copyLabel}
               </button>
-              <small id="launchStatus">
-                {ready
-                  ? "Confirm the contract matches the verified official listing before trading."
-                  : "Trading link will appear after an official, verified contract address is configured."}
-              </small>
+              {ready ? <small id="launchStatus">Confirm the contract matches the verified official listing before trading.</small> : null}
             </div>
             <div className="exit-buttons">
               <TradeLink className="rough-button lime trading-link">GET $TROGEBOB ↗</TradeLink>
