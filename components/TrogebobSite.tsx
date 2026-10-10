@@ -139,6 +139,12 @@ export function TrogebobSite() {
     window.prompt("Copy this meme caption:", str);
   }
 
+  function goToTop(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  }
+
   async function copyContract() {
     await navigator.clipboard.writeText(TROGEBOB_CONFIG.ethereumContract);
     setCopyLabel("COPIED ✓");
@@ -526,7 +532,9 @@ export function TrogebobSite() {
         <p>
           © 2026 Trogebob fan parody. Not affiliated with or endorsed by Vitalik Buterin, Anatoly Yakovenko, Raj Gokal, Netflix, SpongeBob&apos;s rights holders, or the creators of the underlying memes. No investment returns are implied.
         </p>
-        <a href="#top">BACK TO TOP ↑</a>
+        <a href="#top" onClick={goToTop}>
+          BACK TO TOP ↑
+        </a>
       </footer>
       <dialog
         id="lightbox"
