@@ -196,7 +196,20 @@ export function TrogebobSite() {
   }
 
   async function copyContract() {
-    await navigator.clipboard.writeText(TROGEBOB_CONFIG.ethereumContract);
+    const text = ready && TROGEBOB_CONFIG.ethereumContract ? TROGEBOB_CONFIG.ethereumContract : "NOT PUBLISHED";
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
     setCopyLabel("COPIED ✓");
     setTimeout(() => setCopyLabel("COPY ADDRESS"), 1300);
   }
@@ -207,7 +220,7 @@ export function TrogebobSite() {
         Skip to Face Lab
       </a>
       <header className="masthead" id="top">
-        <a className="wordmark" href="#top" aria-label="Trogebob home">
+        <a className="wordmark" href="#top" aria-label="Trogebob home" onClick={goToTop}>
           <img className="wordmark-face" src="/assets/brand/logo.jpg" alt="" width={52} height={52} />
           <span>
             troge<span className="wordmark-end">bob!</span>
@@ -551,7 +564,7 @@ export function TrogebobSite() {
                 <strong>ETHEREUM TOKEN ADDRESS:</strong>
               </p>
               <code id="contractDisplay">{ready ? TROGEBOB_CONFIG.ethereumContract : "NOT PUBLISHED"}</code>
-              <button id="copyContract" type="button" disabled={!ready} onClick={copyContract}>
+              <button id="copyContract" type="button" onClick={copyContract}>
                 {copyLabel}
               </button>
               {ready ? <small id="launchStatus">Confirm the contract matches the verified official listing before trading.</small> : null}
@@ -564,7 +577,9 @@ export function TrogebobSite() {
             </div>
           </div>
           <div className="exit-right">
-            <img loading="lazy" src="/assets/brand/logo.jpg" alt="Trogebob circular meme token mascot" width={700} height={700} />
+            <a className="logo-top" href="#top" aria-label="Back to top" onClick={goToTop}>
+              <img loading="lazy" src="/assets/brand/logo.jpg" alt="Trogebob circular meme token mascot" width={700} height={700} />
+            </a>
             <p>
               THE FACE HAS SPOKEN.
               <br />
@@ -574,7 +589,7 @@ export function TrogebobSite() {
         </section>
       </main>
       <footer className="footer">
-        <a className="wordmark" href="#top">
+        <a className="wordmark" href="#top" onClick={goToTop}>
           troge<span className="wordmark-end">bob!</span>
         </a>
         <p>
