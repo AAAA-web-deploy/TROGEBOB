@@ -5,8 +5,8 @@ export const TROGEBOB_CONFIG = {
   ticker: "TROGEBOB",
   ethereumContract: "",
   officialBuyUrl: "",
-  xUrl: "",
-  telegramUrl: "",
+  xUrl: "https://x.com/trogebob",
+  telegramUrl: "https://t.me/trogebob",
 };
 
 export function isValidAddress(addr: string) {

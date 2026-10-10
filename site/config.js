@@ -5,6 +5,6 @@ window.TROGEBOB_CONFIG = Object.freeze({
   ticker: 'TROGEBOB',
   ethereumContract: '', // Set only after confirmed Ethereum deployment.
   officialBuyUrl: '',   // Example: https://app.uniswap.org/#/swap?... actual verified URL only.
-  xUrl: '',
-  telegramUrl: ''
+  xUrl: 'https://x.com/trogebob',
+  telegramUrl: 'https://t.me/trogebob'
 });
