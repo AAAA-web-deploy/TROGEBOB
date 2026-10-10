@@ -152,7 +152,7 @@ export function TrogebobSite() {
       </a>
       <header className="masthead" id="top">
         <a className="wordmark" href="#top" aria-label="Trogebob home">
-          <span className="wordmark-face">☻</span>
+          <img className="wordmark-face" src="/assets/brand/wordmark-logo.png" alt="" width={36} height={36} />
           <span>
             troge<span className="wordmark-end">bob!</span>
           </span>
